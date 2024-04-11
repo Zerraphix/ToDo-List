@@ -1,6 +1,7 @@
 package com.example.to_dolist;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,15 +9,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<String> tasks;
-    private TaskAdapter taskAdapter;
+    private ArrayList<Task> tasks;
+    private TaskDataAdapter taskDataAdapter;
     private ListView todoListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -25,12 +27,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tasks = new ArrayList<>();
-        tasks.add("Task 1");
-        tasks.add("Task 2");
-        tasks.add("Task 3");
+        tasks.add(new Task(1, "Task 1", "Description for Task 1", false));
+        tasks.add(new Task(2, "Task 2", "Description for Task 2", true));
 
         todoListView = findViewById(R.id.todo_list_view);
-        taskAdapter = new TaskAdapter(this, tasks);
-        todoListView.setAdapter(taskAdapter);
+        taskDataAdapter = new TaskDataAdapter(this, tasks);
+        todoListView.setAdapter(taskDataAdapter);
     }
 }
