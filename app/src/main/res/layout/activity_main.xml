@@ -9,7 +9,7 @@
 <!--Title-->
     <TextView
         android:id="@+id/tasksText"
-        android:text="Tasks"
+        android:text="To Do List"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"

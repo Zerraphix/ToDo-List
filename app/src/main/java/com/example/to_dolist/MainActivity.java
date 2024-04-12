@@ -36,25 +36,26 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        // Starting Database
         db = new DatabaseHandler(this);
         db.openDatabase();
 
+        // Initializing process'
         tasksList = new ArrayList<>();
-
         tasksRecyclerView = findViewById(R.id.todo_list_view);
         tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         tasksAdapter = new ToDoAdapter(db, this);
         tasksRecyclerView.setAdapter(tasksAdapter);
-
         fab = findViewById(R.id.button_add_task);
-
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
+        // Collecting tasks from database
         tasksList = db.getAllTasks();
         Collections.reverse(tasksList);
         tasksAdapter.setTasks(tasksList);
 
+        // Add button process for onClick
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         });
     }
 
+    // What happens when dialog box closes
     @Override
     public void handleDialogClose(DialogInterface dialog){
         tasksList = db.getAllTasks();

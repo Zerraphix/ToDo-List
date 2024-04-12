@@ -4,6 +4,9 @@ public class ToDoModel {
     private  int id, isCompleted;
     private String task;
 
+    // Getter and Setters
+    // Could be auto made by right clicking and selecting Generate...
+
     public int getId() {
         return id;
     }

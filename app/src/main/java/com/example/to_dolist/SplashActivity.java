@@ -18,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
 
+        // Delayer for start screen, with artificial loading the 1000milisecond timer.
         final Intent i = new Intent(SplashActivity.this, MainActivity.class);
         new Handler().postDelayed(new Runnable() {
             @Override

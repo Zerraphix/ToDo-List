@@ -31,6 +31,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
         return new AddNewTask();
     }
 
+    // onCreates for dialog boxes, like styles and input mode
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
         db = new DatabaseHandler(getActivity());
         db.openDatabase();
 
+        // Checker for seeing if it's an update or a new task being made
         boolean isUpdate = false;
         final Bundle bundle = getArguments();
         if (bundle != null) {
@@ -63,12 +65,14 @@ public class AddNewTask extends BottomSheetDialogFragment {
                 newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
             }
         }
+        // Listening for text changes
         newTaskText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
+            // Visualization for seeing if you can save, by changing save button
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().equals("")) {
@@ -92,6 +96,7 @@ public class AddNewTask extends BottomSheetDialogFragment {
             @Override
             public void onClick(View v) {
                 String text = newTaskText.getText().toString();
+                // Here we check for if updating, so either we update or create new
                 if (finalIsUpdate) {
                     db.updateTask(bundle.getInt("id"), text);
                 } else {

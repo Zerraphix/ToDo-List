@@ -60,6 +60,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         return  todoList.size();
     }
 
+    // Sets tasks
     public void setTasks(List<ToDoModel> todoList){
         this.todoList = todoList;
         notifyDataSetChanged();
@@ -68,6 +69,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         return activity;
     }
 
+    // Delete a task
     public void deleteItem(int position){
         ToDoModel item = todoList.get(position);
         db.deleteTask(item.getId());
@@ -75,6 +77,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         notifyItemRemoved(position);
     }
 
+    // Edit a task
     public void editItem(int position){
         ToDoModel item = todoList.get(position);
         Bundle bundle = new Bundle();

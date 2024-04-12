@@ -81,13 +81,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return taskList;
     }
 
-    // Update
+    // Update only isCompleted
     public void updateCompleted(int id, int isCompleted){
         ContentValues cv = new ContentValues();
         cv.put(ISCOMPLETED, isCompleted);
         db.update(TODO_TABLE, cv, ID + "=?", new String[] {String.valueOf(id)});
     }
 
+    // Update
     public void updateTask(int id, String task){
         ContentValues cv = new ContentValues();
         cv.put(TASK, task);

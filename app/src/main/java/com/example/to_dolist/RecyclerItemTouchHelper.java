@@ -22,6 +22,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
         this.adapter = adapter;
     }
 
+    // Boolean for when moving has started
     @Override
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target){
         return false;
@@ -30,12 +31,14 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(final  RecyclerView.ViewHolder viewHolder, int direction){
         final int position = viewHolder.getAdapterPosition();
+        // Swiping left activates a delete action
         if (direction == ItemTouchHelper.LEFT){
+            // Starting a dialog fo being sure of deletion
             AlertDialog.Builder builder = new AlertDialog.Builder(adapter.getContext());
             builder.setTitle("Delete Task");
             builder.setMessage("Are you sure you wanna delete this task?");
             builder.setPositiveButton("Yes",
-                    new DialogInterface.OnClickListener() {
+                    new DialogInterface.OnClickListener() { // Delete
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             adapter.deleteItem(position);
@@ -43,18 +46,21 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
                     });
             builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(DialogInterface dialog, int which) { // Cancel
                     adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                 }
             });
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+        // Else is just fo other than left swipe, aka right.
+        // Here we will activate edit instead
         else {
             adapter.editItem(position);
         }
     }
 
+    // This is for all the design for delete and edit.
     @Override
     public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive){
         super.onChildDraw(c, recyclerView, viewHolder, dX,dY,actionState,isCurrentlyActive);
