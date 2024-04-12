@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         ToDoModel task = new ToDoModel();
         task.setTask("This is a Test Task");
-        task.setCompleted(false);
+        task.setCompleted(0);
         task.setId(1);
 
         tasksList.add(task);
