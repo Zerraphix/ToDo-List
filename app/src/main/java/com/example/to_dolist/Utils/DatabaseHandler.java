@@ -19,11 +19,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String ID = "id";
     private static final String TASK = "task";
     private static final String ISCOMPLETED = "iscompleted";
-    private static final String CREATE_TODO_TABLE = "CREATE TABLE " + TODO_TABLE + "(" + ID + "," + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                            + TASK + "TEXT, " + ISCOMPLETED + "INTEGER)";
+    private static final String CREATE_TODO_TABLE = "CREATE TABLE " + TODO_TABLE + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + TASK + " TEXT, " + ISCOMPLETED + " INTEGER)";
     private SQLiteDatabase db;
 
-    private DatabaseHandler(Context context){
+    public DatabaseHandler(Context context){
         super(context, NAME, null, VERSION);
     }
 
@@ -48,7 +48,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // CRUD
 
     // Create
-    public void creatTask(ToDoModel task){
+    public void createTask(ToDoModel task){
         ContentValues cv = new ContentValues();
         cv.put(TASK, task.getTask());
         cv.put(ISCOMPLETED, false);
@@ -82,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Update
-    public void updateCompleted(int id, boolean isCompleted){
+    public void updateCompleted(int id, int isCompleted){
         ContentValues cv = new ContentValues();
         cv.put(ISCOMPLETED, isCompleted);
         db.update(TODO_TABLE, cv, ID + "=?", new String[] {String.valueOf(id)});
