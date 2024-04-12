@@ -1,9 +1,8 @@
 package com.example.to_dolist.Model;
 
 public class ToDoModel {
-    private  int id;
+    private  int id, isCompleted;
     private String task;
-    private Boolean isCompleted;
 
     public int getId() {
         return id;
@@ -13,19 +12,19 @@ public class ToDoModel {
         this.id = id;
     }
 
+    public int getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(int isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+
     public String getTask() {
         return task;
     }
 
     public void setTask(String task) {
         this.task = task;
-    }
-
-    public Boolean getCompleted() {
-        return isCompleted;
-    }
-
-    public void setCompleted(Boolean completed) {
-        isCompleted = completed;
     }
 }

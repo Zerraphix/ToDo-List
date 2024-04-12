@@ -29,7 +29,12 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         ToDoModel item = todoList.get(position);
         holder.task.setText(item.getTask());
-        holder.task.setChecked(item.getCompleted());
+        holder.task.setChecked(toBoolean(item.getCompleted()));
+    }
+
+    // Had to make boolean converter because SQLite not having a boolean datatype
+    private  boolean toBoolean(int n){
+        return n!=0;
     }
 
     public int getItemCount(){
